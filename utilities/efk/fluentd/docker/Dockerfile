@@ -21,6 +21,7 @@ RUN apk --no-cache --update add \
     gem install fluent-plugin-kubernetes_metadata_filter -v 0.23.0 && \
     gem install fluent-plugin-rewrite-tag-filter -v 1.5.5 && \ 
     gem install fluent-plugin-parser -v 0.6.1 && \
+    gem install fluent-plugin-dedot_filter && \
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
@@ -34,7 +35,7 @@ RUN mkdir -p /fluentd/etc /fluentd/plugins
 
 RUN chown -R fluent:fluent /fluentd
 
-USER fluent
+#USER fluent
 WORKDIR /home/fluent
 
 # Tell ruby to install packages as user
