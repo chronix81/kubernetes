@@ -22,6 +22,7 @@ RUN apk --no-cache --update add \
     gem install fluent-plugin-rewrite-tag-filter -v 1.5.5 && \ 
     gem install fluent-plugin-parser -v 0.6.1 && \
     gem install fluent-plugin-dedot_filter && \
+    gem install fluent-plugin-remote_syslog && \
     apk del build-base ruby-dev && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
