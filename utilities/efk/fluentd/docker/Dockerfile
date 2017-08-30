@@ -1,8 +1,7 @@
-FROM alpine:3.4
+FROM alpine:3.6
 MAINTAINER Michal Bandura <mjbandura@gmail.com>
 # This image contains additional fluentd plugins, one of them requires ruby-dev during installation
 # so basing on fluent/fluentd would require to install already deleted package ruby-dev
-# still need to figure out the best way to pass custom fluentd configuration (using volumes is not very convinient in multi-nodes kubenetes installations)
 LABEL Description="Fluentd for Kubernetes" Vendor="none" Version="1.1"
 
 # Do not split this into multiple RUN!
@@ -16,11 +15,11 @@ RUN apk --no-cache --update add \
                             ruby-dev && \
     echo 'gem: --no-document' >> /etc/gemrc && \
     gem install oj && \
-    gem install fluentd -v 0.12.26 && \
-    gem install fluent-plugin-elasticsearch -v 1.5.0 && \
-    gem install fluent-plugin-kubernetes_metadata_filter -v 0.23.0 && \
-    gem install fluent-plugin-rewrite-tag-filter -v 1.5.5 && \ 
-    gem install fluent-plugin-parser -v 0.6.1 && \
+    gem install fluentd -v '~> 0.12.0' && \
+    gem install fluent-plugin-elasticsearch && \
+    gem install fluent-plugin-kubernetes_metadata_filter && \
+    gem install fluent-plugin-rewrite-tag-filter && \ 
+    gem install fluent-plugin-parser && \
     gem install fluent-plugin-dedot_filter && \
     gem install fluent-plugin-remote_syslog && \
     apk del build-base ruby-dev && \
